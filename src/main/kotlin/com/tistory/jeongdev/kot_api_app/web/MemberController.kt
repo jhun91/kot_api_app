@@ -1,4 +1,4 @@
-package com.tistory.jeongdev.kot_api_app.web.api
+package com.tistory.jeongdev.kot_api_app.web
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,6 +10,6 @@ class MemberController {
 
     @PostMapping("/join")
     fun joinMember(): String {
-        return ""
+        return "join"
     }
 }
