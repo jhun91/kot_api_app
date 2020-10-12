@@ -19,6 +19,6 @@ class MemberController(
     fun joinMember(@RequestBody requestDto: MemberRequestDto): ResponseEntity<MsgResponseDto> {
         val newMember = memberService.save(requestDto)
 
-        return ResponseEntity.ok(MsgResponseDto("${newMember.userId} 계정이 생성되었습니다."))
+        return ResponseEntity.ok(MsgResponseDto("${newMember.memberId} 계정이 생성되었습니다."))
     }
 }

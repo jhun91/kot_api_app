@@ -31,6 +31,8 @@ dependencies {
 
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
 
+    implementation ("io.github.microutils:kotlin-logging-jvm:2.0.2")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     runtimeOnly("com.h2database:h2")

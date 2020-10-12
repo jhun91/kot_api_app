@@ -11,13 +11,13 @@ data class Member(
         val id: Long? = null,
 
         @Column
-        val userId: String? = null,
+        val memberId: String? = null,
 
         @Column
-        private val userPw: String? = null,
+        private val memberPw: String? = null,
 
         @Column
-        private val name: String? = null,
+        private val memberName: String? = null,
 
         @Column
         private val lastLoginTime: LocalDateTime? = null,
