@@ -1,6 +1,6 @@
 package com.tistory.jeongdev.kot_api_app.web.api
 
-import com.tistory.jeongdev.kot_api_app.web.dto.MemberRequestDto
+import com.tistory.jeongdev.kot_api_app.web.dto.MemberJoinRequestDto
 import mu.KotlinLogging
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ internal class MemberControllerTests {
 
         val memberId = "user@test.com"
 
-        val requestDto = MemberRequestDto(
+        val requestDto = MemberJoinRequestDto(
                 memberId = "user@test.com",
                 memberPw = "testuser12!@",
                 memberName = "테스트유저"
@@ -43,5 +43,10 @@ internal class MemberControllerTests {
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(responseEntity.body).contains(memberId)
         logger.debug { responseEntity.body }
+    }
+
+    @Test
+    fun loginMember() {
+
     }
 }
