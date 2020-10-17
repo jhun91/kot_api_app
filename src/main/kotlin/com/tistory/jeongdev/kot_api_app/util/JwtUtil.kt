@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct
 
 @Component
 class JwtUtil(
-        val secret: String = "jwtsecretkey12345678901111",
+        val secret: String = "jwtsecretkey1jwtsecretkey1jwtsecretkey1123",
         var key: Key? = null
 ) {
 

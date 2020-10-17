@@ -77,6 +77,6 @@ internal class MemberControllerTests {
         val responseEntity: ResponseEntity<String> = restTemplate.postForEntity(url, requestDto, String)
 
         assertThat(responseEntity.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(responseEntity.body).contains("login")
+        assertThat(responseEntity.body).contains(".")
     }
 }
