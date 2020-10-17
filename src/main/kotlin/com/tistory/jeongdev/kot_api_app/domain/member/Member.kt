@@ -20,7 +20,7 @@ data class Member(
         private val memberPw: String,
 
         @Column
-        private val memberName: String,
+        val memberName: String,
 
         @Column
         private val lastLoginTime: LocalDateTime? = null,

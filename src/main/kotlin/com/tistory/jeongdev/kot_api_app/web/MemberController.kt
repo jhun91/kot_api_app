@@ -2,9 +2,13 @@ package com.tistory.jeongdev.kot_api_app.web
 
 import com.tistory.jeongdev.kot_api_app.domain.member.Member
 import com.tistory.jeongdev.kot_api_app.service.MemberService
+import com.tistory.jeongdev.kot_api_app.util.JwtUtil
 import com.tistory.jeongdev.kot_api_app.web.dto.MemberJoinRequestDto
 import com.tistory.jeongdev.kot_api_app.web.dto.MemberLoginRequestDto
+import com.tistory.jeongdev.kot_api_app.web.dto.MemberLoginResponseDto
 import com.tistory.jeongdev.kot_api_app.web.dto.MsgResponseDto
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -20,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/member")
 class MemberController(
         val memberService: MemberService,
-        val authenticationManager: AuthenticationManager
+        val authenticationManager: AuthenticationManager,
+        val jwtUtil: JwtUtil
 ) {
 
     @PostMapping("/join")
@@ -31,15 +36,24 @@ class MemberController(
     }
 
     @PostMapping("/login")
-    fun loginMember(@RequestBody requestDto: MemberLoginRequestDto): String {
+    fun loginMember(@RequestBody requestDto: MemberLoginRequestDto): ResponseEntity<MemberLoginResponseDto> {
         val loginMember: Member = memberService.loadUserByUsername(requestDto.memberId) as Member
-        val authentication: Authentication  = authenticationManager.authenticate(
+        val authentication: Authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(loginMember, requestDto.memberPw)
         )
         SecurityContextHolder.getContext().authentication = authentication
 
-        println(loginMember)
+        val token: String = jwtUtil.createToken(loginMember.memberId, loginMember.memberName)
 
-        return "login"
+        val headers: HttpHeaders = HttpHeaders()
+        headers.set("authorization", "Bearer $token")
+
+        return ResponseEntity(
+                MemberLoginResponseDto(
+                        accessToken = token
+                ),
+                headers,
+                HttpStatus.OK
+        )
     }
 }
